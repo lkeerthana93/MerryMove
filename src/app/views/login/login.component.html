@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <form class="form-horizontal"
+        role="form"
+        name="loginForm"
+        novalidate
+        #loginForm="ngForm">
+    <div class="login text-center">
+      <h1>Login</h1>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-envelope"></i>
+          </span>
+          <input type="email"
+                 id="email"
+                 class="form-control"
+                 placeholder="Enter email"
+                 [ngClass]="{'is-invalid': emailField.touched && emailField.invalid}"
+                 name = "email"
+                 [(ngModel)] ="email"
+                 #emailField = "ngModel"
+                 required />
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-lock"></i>
+          </span>
+          <input type="password"
+                 id="password"
+                 class="form-control"
+                 [ngClass]="{'is-invalid': passwordField.touched && passwordField.invalid}"
+                 placeholder="Password"
+                 name = "password"
+                 [(ngModel)] ="password"
+                 #passwordField = "ngModel"
+                 required />
+        </div>
+
+        <div class="form-group btn-small">
+          <button type="submit"
+                  class="btn btn-default btn-primary btn-block"
+                  (click)="login(email, password)"
+                  [disabled] = "loginForm.invalid">
+            Login
+          </button>
+        </div>
+        <div class="float-right">
+          <a routerLink="/register">Not a member?</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
