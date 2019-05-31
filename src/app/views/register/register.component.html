@@ -1,3 +1,118 @@
-<p>
-  register works!
-</p>
+<div class="container-fluid">
+  <form class="form-horizontal"
+        role="form"
+        name="registrationForm"
+        novalidate
+        #registrationForm="ngForm">
+    <div class="register text-center">
+      <h1>Register</h1>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text"
+                 id="name"
+                 class="form-control"
+                 placeholder="Enter Fullname"
+                 [ngClass]="{'is-invalid': nameField.touched && nameField.invalid}"
+                 name = "name"
+                 [(ngModel)] ="name"
+                 #nameField = "ngModel"
+                 required />
+          <div *ngIf="nameField.touched && nameField.invalid"
+               class="invalid-feedback">
+            Name is required
+          </div>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-phone"></i>
+          </span>
+          <input type="tel"
+                 id="phone"
+                 class="form-control"
+                 placeholder="Enter Phone number"
+                 [ngClass]="{'is-invalid': phoneField.touched && phoneField.invalid}"
+                 name = "phone"
+                 [(ngModel)] ="phone"
+                 #phoneField = "ngModel"
+                 pattern="[0-9].{6,}"
+                 required />
+          <div *ngIf="phoneField.touched && phoneField.invalid"
+               class="invalid-feedback">
+            Phone number must contain minimum 7 digits
+          </div>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-envelope"></i>
+          </span>
+          <input type="email"
+                 id="email"
+                 class="form-control"
+                 placeholder="Enter email"
+                 [ngClass]="{'is-invalid': emailField.touched && emailField.invalid}"
+                 name = "email"
+                 [(ngModel)] ="email"
+                 #emailField = "ngModel"
+                 pattern="^\S*[@]\S*[.]\S*$"
+                 email
+                 required />
+          <div *ngIf="emailField.touched && emailField.invalid"
+               class="invalid-feedback">
+            Proper email id is required
+          </div>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-lock"></i>
+          </span>
+          <input type="password"
+                 id="password"
+                 class="form-control"
+                 [ngClass]="{'is-invalid': passwordField.touched && passwordField.invalid}"
+                 placeholder="Password"
+                 name = "password"
+                 [(ngModel)] ="password"
+                 #passwordField = "ngModel"
+                 required />
+          <div *ngIf="passwordField.touched && passwordField.invalid"
+               class="invalid-feedback">
+            Password is required
+          </div>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-lock"></i>
+          </span>
+          <input type="password"
+                 id="cPassword"
+                 class="form-control"
+                 [ngClass]="{'is-invalid':  (cPasswordField.touched && cPasswordField.valid) && (password !== cPassword) || (cPasswordField.touched &&cPasswordField.invalid)}"
+                 placeholder="Re-enter Password"
+                 name = "cPassword"
+                 [(ngModel)] ="cPassword"
+                 #cPasswordField = "ngModel"
+                 required />
+          <div *ngIf=" (cPasswordField.touched && cPasswordField.valid) && (password !== cPassword) || (cPasswordField.touched &&cPasswordField.invalid)"
+               class="invalid-feedback">
+            Passwords must match
+          </div>
+        </div>
+
+        <div class="form-group btn-small">
+          <button type="submit"
+                  class="btn btn-default btn-primary btn-block"
+                  (click)="register(name, phone, email, password)"
+                  [disabled] = "(registrationForm.invalid) || (password !== cPassword)">
+            Submit
+          </button>
+        </div>
+        <div class="float-right">
+          <a routerLink="/login">Already a member?</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
